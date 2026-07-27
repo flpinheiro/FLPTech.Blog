@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/cloud/">
+    <Project Path="cloud/FLPTech.Blog.AppHost/FLPTech.Blog.AppHost.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/FLPTech.Blog.ApiService/FLPTech.Blog.ApiService.csproj" />
+    <Project Path="src/FLPTech.Blog.Domain.Application/FLPTech.Blog.Domain.Application.csproj" Id="7a6b97a5-fd3e-4f95-b396-2064822df2f7" />
+    <Project Path="src/FLPTech.Blog.Domain/FLPTech.Blog.Domain.csproj" Id="2317a59b-5275-43f8-9779-09135f757699" />
+    <Project Path="src/FLPTech.Blog.Infraestructure.MigrationService/FLPTech.Blog.Infraestructure.MigrationService.csproj" />
+    <Project Path="src/FLPTech.Blog.Infraestructure/FLPTech.Blog.Infraestructure.csproj" />
+    <Project Path="src/FLPTech.Blog.ServiceDefaults/FLPTech.Blog.ServiceDefaults.csproj" />
+    <Project Path="src/FLPTech.Blog.Web/FLPTech.Blog.Web.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/FLPTech.Blog.Tests/FLPTech.Blog.Tests.csproj" />
+  </Folder>
+</Solution>

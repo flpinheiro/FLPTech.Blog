@@ -8,7 +8,7 @@ public class GetArticleQueryHandler(IUnitOfWork uow) : IQueryHandler<GetArticleQ
 {
     public async Task<IEnumerable<GetArticleQueryDto>> Handle(GetArticleQuery query, CancellationToken cancellationToken)
     {
-        var articles =  await uow.Articles.GetAllArticlesAsync(cancellationToken);
+        var articles =  await uow.Articles.GetAsync(cancellationToken);
 
         var mapper = new ArticlesMappers();
         var dtos = mapper.ArticlesToGetArticleQueryDtos(articles);

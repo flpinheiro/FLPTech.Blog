@@ -13,8 +13,11 @@ public partial class ArticlesMappers
     public partial Article CreateArticleCommandToArticle(CreateArticleCommand command);
 
     public partial GetArticleByIdQueryDto ArticleToGetArticleByIdQueryDto(Article article);
-    
-    [MapperIgnoreTarget(nameof(Article.Content))]
+
+#pragma warning disable IDE0079
+#pragma warning disable RMG020
     [MapperIgnoreSource(nameof(Article.Content))]
     public partial IEnumerable<GetArticleQueryDto> ArticlesToGetArticleQueryDtos(IEnumerable<Article> articles);
+#pragma warning restore RMG020
+#pragma warning restore IDE0079
 }

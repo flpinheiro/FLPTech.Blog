@@ -7,17 +7,17 @@ namespace FLPTech.Blog.Infraestructure.Repositories;
 
 internal class ArticleRepository(AppDbContext dbContext) : IArticleRepository
 {
-    public void AddArticle(Article article)
+    public void Add(Article article)
     {
         dbContext.Articles.Add(article);
     }
 
-    public void DeleteArticle(Article article)
+    public void Delete(Article article)
     {
         dbContext.Articles.Remove(article);
     }
 
-    public async Task<IEnumerable<Article>> GetAllArticlesAsync(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<Article>> GetAsync(CancellationToken cancellationToken = default)
     {
         return await dbContext.Articles.AsNoTracking().Select(a => new Article
         {
@@ -27,12 +27,12 @@ internal class ArticleRepository(AppDbContext dbContext) : IArticleRepository
         }).ToListAsync(cancellationToken);
     }
 
-    public async Task<Article?> GetArticleByIdAsync(Guid articleId, CancellationToken cancellationToken = default)
+    public async Task<Article?> GetByIdAsync(Guid articleId, CancellationToken cancellationToken = default)
     {
         return await dbContext.Articles.FindAsync(articleId, cancellationToken);
     }
 
-    public void UpdateArticle(Article article)
+    public void Update(Article article)
     {
         dbContext.Articles.Update(article);
     }

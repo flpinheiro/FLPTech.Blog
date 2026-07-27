@@ -11,7 +11,7 @@ public class CreateArticleCommandHandler(IUnitOfWork unitOfWork) : ICommandHandl
         var mapper = new ArticlesMappers();
         var article = mapper.CreateArticleCommandToArticle(command);
 
-        unitOfWork.Articles.AddArticle(article);
+        unitOfWork.Articles.Add(article);
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return article.Id;

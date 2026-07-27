@@ -7,10 +7,10 @@ namespace FLPTech.Blog.Domain.Services.Repositories;
 
 public interface IArticleRepository
 {
-    Task<Article?> GetArticleByIdAsync(Guid articleId, CancellationToken cancellationToken = default);
-    Task<IEnumerable<Article>> GetAllArticlesAsync(CancellationToken cancellationToken = default);
+    Task<Article?> GetByIdAsync(Guid articleId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Article>> GetAsync(CancellationToken cancellationToken = default);
 
-    void UpdateArticle(Article article);
-    void AddArticle(Article article);
-    void DeleteArticle(Article article);
+    void Update(Article article);
+    void Add(Article article);
+    void Delete(Article article);
 }

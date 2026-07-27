@@ -1,6 +1,7 @@
 ﻿using Cortex.Mediator;
 using FLPTech.Blog.ApiService.Mappers;
 using FLPTech.Blog.ApiService.Requests.Articles;
+using FLPTech.Blog.Domain.Application.UseCases.Articles.DeleteArticle;
 using FLPTech.Blog.Domain.Application.UseCases.Articles.ReadArticle;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,54 +11,60 @@ namespace FLPTech.Blog.ApiService.Controllers;
 [ApiController]
 public class ArticleController(IMediator mediator) : ControllerBase
 {
-    private readonly ArticlesRequestMappers mappers = new ArticlesRequestMappers();
+    private readonly ArticlesRequestMappers mappers = new ();
 
     [HttpPost]
-    public async Task<IActionResult> CreateArticle([FromBody] CreateArticleRequest request, CancellationToken ct)
+    public async Task<IActionResult> Create([FromBody] CreateArticleRequest request, CancellationToken ct)
     {
-        var command = mappers.CreateArticleRequestToCreateArticleCommand(request);
-        if(command == null)
+        var command = mappers.CreateRequestToCreateCommand(request);
+        if (command == null)
             return BadRequest("Invalid request data.");
         var articleId = await mediator.SendAsync(command, ct);
-        return CreatedAtAction(nameof(CreateArticle), new { id = articleId }, null);
+        return CreatedAtAction(nameof(Create), new { id = articleId }, null);
     }
 
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetArticle(Guid id, CancellationToken ct)
+    public async Task<IActionResult> Get(Guid id, CancellationToken ct)
     {
         var query = new GetArticleByIdQuery { Id = id };
         var article = await mediator.QueryAsync(query, ct);
         if (article == null)
             return NotFound();
-        var articleResponse = mappers.GetArticleByIdQueryDtoToArticleResponse(article);
+        var articleResponse = mappers.GetByIdQueryDtoToResponse(article);
         return Ok(articleResponse);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetArticles(CancellationToken ct)
+    public async Task<IActionResult> Get(CancellationToken ct)
     {
         var query = new GetArticleQuery();
         var articles = await mediator.QueryAsync(query, ct);
-        var articlesResponse = mappers.GetArticleQueryDtoToArticlesResponse(articles) ?? [];
+        var articlesResponse = mappers.GetQueryDtoToResponse(articles) ?? [];
         return Ok(articlesResponse);
     }
-    //[HttpPut("{id:guid}")]
-    //public async Task<IActionResult> UpdateArticle([FromRoute] Guid id, [FromBody] UpdateArticleRequest request, CancellationToken ct)
-    //{
-    //    var command = mappers.UpdateArticleRequestToUpdateArticleCommand(request);
-    //    if (command == null)
-    //        return BadRequest("Invalid request data.");
-    //    await mediator.SendAsync(command, ct);
-    //    return NoContent();
-    //}
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateArticleRequest request, CancellationToken ct)
+    {
+        var command = mappers.UpdateRequestToUpdateCommand(request, id);
+        if (command == null)
+            return BadRequest("Invalid request data.");
+        if (await mediator.SendAsync(command, ct))
+        {
+            return BadRequest("Failed to update article.");
+        }
+        return Ok();
+    }
 
-    //[HttpDelete("{id:guid}")]
-    //public async Task<IActionResult> DeleteArticle([FromRoute] Guid id, CancellationToken ct)
-    //{
-    //    var command = mappers.DeleteArticleRequestToDeleteArticleCommand(request);
-    //    if (command == null)
-    //        return BadRequest("Invalid request data.");
-    //    await mediator.SendAsync(command, ct);
-    //    return NoContent();
-    //}
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken ct)
+    {
+        var command = new DeleteArticleCommand { Id = id };
+        if (command == null)
+            return BadRequest("Invalid request data.");
+        if (await mediator.SendAsync(command, ct))
+        {
+            return BadRequest("Failed to delete article.");
+        }
+        return Ok();
+    }
 }

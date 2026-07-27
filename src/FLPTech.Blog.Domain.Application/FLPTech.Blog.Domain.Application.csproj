@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Articles\DeleteArticle\" />
-    <Folder Include="UseCases\Articles\UpdateArticle\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Cortex.Mediator" Version="3.1.2" />
     <PackageReference Include="Riok.Mapperly" Version="5.0.0-next.10" />
   </ItemGroup>

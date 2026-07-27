@@ -10,7 +10,7 @@ public class GetArticleByIdQueryHandler(IUnitOfWork uow) : IQueryHandler<GetArti
     {
         var mapper = new ArticlesMappers();
 
-        var article = await uow.Articles.GetArticleByIdAsync(query.Id);
+        var article = await uow.Articles.GetByIdAsync(query.Id);
 
         if (article is null) return null;
 

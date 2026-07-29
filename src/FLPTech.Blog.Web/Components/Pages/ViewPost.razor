@@ -1,0 +1,18 @@
+﻿@page "/post/{Id}"
+
+@rendermode InteractiveServer
+
+@if(BlogPost == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <h3>@BlogPost.Title</h3>
+
+    <div>@BlogPost.Content</div>
+
+    <div>@BlogPost.PublishedDate</div>
+}
+
+<button class="btn btn-secondary" @onclick="() => BackToList()">Back to List</button>

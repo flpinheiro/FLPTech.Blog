@@ -1,4 +1,4 @@
-using FLPTech.Blog.Web;
+using FLPTech.Blog.Web.Clients;
 using FLPTech.Blog.Web.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,12 +11,7 @@ builder.AddRedisOutputCache("cache");
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient<WeatherApiClient>(client =>
-    {
-        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
-        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
-        client.BaseAddress = new("https+http://apiservice");
-    });
+AddHttpClients(builder);
 
 //builder.Services.AddInfraestructureConfigs();
 
@@ -43,3 +38,21 @@ app.MapRazorComponents<App>()
 app.MapDefaultEndpoints();
 
 app.Run();
+
+static void AddHttpClients(WebApplicationBuilder builder)
+{
+    string baseAddress = builder.Configuration.GetValue<string>("ApiService:BaseAddress") ?? throw new ArgumentNullException("ApiServiceBaseAddress configuration is missing.");
+    builder.Services.AddHttpClient<WeatherApiClient>(client =>
+    {
+        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+        client.BaseAddress = new(baseAddress);
+    });
+
+    builder.Services.AddHttpClient<BlogApiClient>(client =>
+    {
+        // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.
+        // Learn more about service discovery scheme resolution at https://aka.ms/dotnet/sdschemes.
+        client.BaseAddress = new(baseAddress);
+    });
+}

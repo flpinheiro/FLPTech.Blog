@@ -1,0 +1,34 @@
+﻿@page "/post/new"
+@page "/post/edit/{Id}"
+
+@rendermode InteractiveServer
+
+@if (!IsNewPost)
+{
+    <h3>Edit Post</h3>
+}
+else
+{
+    <h3>New Post</h3>
+}
+
+<EditForm Model=@BlogPost FormName="edit-blog-post" OnSubmit=@SavePostAsync>
+    <div class="form-group">
+        <label for="post-title">Title:</label>
+        <InputText @bind-Value=BlogPost.Title id="post-title" />
+
+    </div>
+
+    <div class="form-group">
+        <label for="post-content">Content:</label>
+        <InputTextArea @bind-Value=BlogPost.Content id="post-content" />
+
+    </div>
+
+    <div class="button-group">
+        <input type="submit" class="btn btn-primary" value="Save"/>
+    </div>
+
+</EditForm>
+
+<button class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>

@@ -1,7 +1,52 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Blog</PageTitle>
 
-<h1>Hello, world!</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Actions</th>
+            <th>Title</th>
+            <th>Published Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (posts == null)
+        {
+            <tr>
+                <td colspan="3"><em>Loading...</em></td>
+            </tr>
+        }
+        else foreach (var post in posts)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" title="View" aria-label="View post" @onclick="() => ViewPost(post.Id)">
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" title="Edit" aria-label="Edit post" @onclick="() => EditPost(post.Id)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" title="Delete" aria-label="Delete post" @onclick="() => DeletePost(post.Id)">
+                        <i class="fa fa-trash-o"></i>
+                    </button>
+                </td>
+                <td>
+                    <a title="title" aria-label="title post" @onclick="() => ViewPost(post.Id)">
+                        @post.Title
+                    </a>
+                </td>
+                <td>
+                    @post.PublishedDate.ToShortDateString()
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-Welcome to your new app.
+<div>
+    <button class="btn btn-sm btn-outline-primary" title="View" aria-label="new post" @onclick="() => NewPost()">
+        <i class="fa fa-plus"></i> New Post
+    </button>
+</div>

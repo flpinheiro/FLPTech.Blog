@@ -1,6 +1,41 @@
+@FLPTech.Blog.ApiService_HostAddress = https://localhost:7563
 @ApiService_HostAddress = http://localhost:5556
+@id=1049dcab-1dac-4981-a2f6-f092eeebf0fc
+
+### get weather foresct
 
 GET {{ApiService_HostAddress}}/weatherforecast/
 Accept: application/json
 
+### get articles
+GET {{FLPTech.Blog.ApiService_HostAddress}}/api/article
+Accept: application/json
+
+### get article by id
+GET {{FLPTech.Blog.ApiService_HostAddress}}/api/article/{{id}}
+Accept: application/json
+
+### create article
+POST {{FLPTech.Blog.ApiService_HostAddress}}/api/article
+Content-Type: application/json
+Accept: application/json
+{
+  "title": "test create",
+  "content": "test create"
+}
+
+### update article
+PUT {{FLPTech.Blog.ApiService_HostAddress}}/api/article/{{id}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "test update",
+  "content": "test update"
+}
+
+### delete article
+DELETE {{FLPTech.Blog.ApiService_HostAddress}}/api/Article/{{id}}
+Content-Type: application/json
+Accept: application/json
 ###

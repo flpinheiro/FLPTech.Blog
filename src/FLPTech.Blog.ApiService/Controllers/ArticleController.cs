@@ -48,7 +48,7 @@ public class ArticleController(IMediator mediator) : ControllerBase
         var command = mappers.UpdateRequestToUpdateCommand(request, id);
         if (command == null)
             return BadRequest("Invalid request data.");
-        if (await mediator.SendAsync(command, ct))
+        if (!await mediator.SendAsync(command, ct))
         {
             return BadRequest("Failed to update article.");
         }
@@ -61,7 +61,7 @@ public class ArticleController(IMediator mediator) : ControllerBase
         var command = new DeleteArticleCommand { Id = id };
         if (command == null)
             return BadRequest("Invalid request data.");
-        if (await mediator.SendAsync(command, ct))
+        if (!await mediator.SendAsync(command, ct))
         {
             return BadRequest("Failed to delete article.");
         }

@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!--<PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.4.6" />-->
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Keycloak.Extensions" Version="13.4.1-*" />
+    <PackageReference Include="Aspire.Hosting.Keycloak" Version="13.4.6-*" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="13.4.6" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.4.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
@@ -20,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\FLPTech.Blog.ApiService\FLPTech.Blog.ApiService.csproj" />
     <ProjectReference Include="..\..\src\FLPTech.Blog.Infraestructure.MigrationService\FLPTech.Blog.Infraestructure.MigrationService.csproj" />
+    <ProjectReference Include="..\..\src\FLPTech.Blog.Web.BFF\FLPTech.Blog.Web.BFF.csproj" />
     <ProjectReference Include="..\..\src\FLPTech.Blog.Web\FLPTech.Blog.Web.csproj" />
   </ItemGroup>
 

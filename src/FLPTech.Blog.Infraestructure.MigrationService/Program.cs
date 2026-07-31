@@ -1,9 +1,10 @@
-using FLPTech.Blog.Infraestructure.Contexts;
 using FLPTech.Blog.Infraestructure.MigrationService;
+using FLPTech.Blog.ServiceDefaults;
 
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
+builder.AddDatabaseServices();
 builder.Services.AddHostedService<Worker>();
 
 builder.Services.AddOpenTelemetry()

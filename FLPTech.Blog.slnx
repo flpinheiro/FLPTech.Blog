@@ -9,6 +9,7 @@
     <Project Path="src/FLPTech.Blog.Infraestructure.MigrationService/FLPTech.Blog.Infraestructure.MigrationService.csproj" />
     <Project Path="src/FLPTech.Blog.Infraestructure/FLPTech.Blog.Infraestructure.csproj" />
     <Project Path="src/FLPTech.Blog.ServiceDefaults/FLPTech.Blog.ServiceDefaults.csproj" />
+    <Project Path="src/FLPTech.Blog.Web.BFF/FLPTech.Blog.Web.BFF.csproj" />
     <Project Path="src/FLPTech.Blog.Web/FLPTech.Blog.Web.csproj" />
   </Folder>
   <Folder Name="/test/">

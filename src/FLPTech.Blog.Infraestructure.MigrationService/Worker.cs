@@ -34,8 +34,10 @@ public class Worker(
             activity?.AddException(ex);
             throw;
         }
-
-        hostApplicationLifetime.StopApplication();
+        finally
+        {
+            hostApplicationLifetime.StopApplication();
+        }
     }
 
     private static async Task EnsureDatabaseAsync(AppDbContext dbContext, CancellationToken cancellationToken)

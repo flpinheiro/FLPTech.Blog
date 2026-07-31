@@ -1,6 +1,4 @@
 ﻿using FLPTech.Blog.Domain.Services.Repositories;
-using FLPTech.Blog.Infraestructure.Contexts;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

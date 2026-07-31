@@ -1,3 +1,4 @@
+using FLPTech.Blog.ServiceDefaults;
 using FLPTech.Blog.Web.Clients;
 using FLPTech.Blog.Web.Components;
 
@@ -12,8 +13,6 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 AddHttpClients(builder);
-
-//builder.Services.AddInfraestructureConfigs();
 
 var app = builder.Build();
 
@@ -41,7 +40,7 @@ app.Run();
 
 static void AddHttpClients(WebApplicationBuilder builder)
 {
-    string baseAddress = builder.Configuration.GetValue<string>("ApiService:BaseAddress") ?? throw new ArgumentNullException("ApiServiceBaseAddress configuration is missing.");
+    string baseAddress = builder.Configuration.GetValue<string>("ApiService:BaseAddress") ?? throw new ArgumentNullException("ApiService:BaseAddress configuration is missing.");
     builder.Services.AddHttpClient<WeatherApiClient>(client =>
     {
         // This URL uses "https+http://" to indicate HTTPS is preferred over HTTP.

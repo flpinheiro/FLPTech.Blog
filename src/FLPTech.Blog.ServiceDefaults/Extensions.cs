@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Trace;
 
-namespace Microsoft.Extensions.Hosting;
+namespace FLPTech.Blog.ServiceDefaults;
 
 // Adds common Aspire services: service discovery, resilience, health checks, and OpenTelemetry.
 // This project should be referenced by each service project in your solution.
@@ -41,8 +42,14 @@ public static class Extensions
         //     options.AllowedSchemes = ["https"];
         // });
 
-        builder.AddSqlServerDbContext<AppDbContext>("database");
+        //builder.AddSqlServerDbContext<AppDbContext>("database");
 
+        return builder;
+    }
+
+    public static TBuilder AddDatabaseServices<TBuilder>(this TBuilder builder) where TBuilder : IHostApplicationBuilder
+    {
+        builder.AddSqlServerDbContext<AppDbContext>("database");
         return builder;
     }
 

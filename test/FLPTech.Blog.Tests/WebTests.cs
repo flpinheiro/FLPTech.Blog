@@ -4,7 +4,7 @@ namespace FLPTech.Blog.Tests;
 
 public class WebTests
 {
-    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(30);
+    private static readonly TimeSpan DefaultTimeout = TimeSpan.FromSeconds(5 * 60);
 
     [Fact]
     public async Task GetWebResourceRootReturnsOkStatusCode()

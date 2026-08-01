@@ -2,6 +2,9 @@
   <Folder Name="/cloud/">
     <Project Path="cloud/FLPTech.Blog.AppHost/FLPTech.Blog.AppHost.csproj" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/FLPTech.Blog.ApiService/FLPTech.Blog.ApiService.csproj" />
     <Project Path="src/FLPTech.Blog.Domain.Application/FLPTech.Blog.Domain.Application.csproj" Id="7a6b97a5-fd3e-4f95-b396-2064822df2f7" />

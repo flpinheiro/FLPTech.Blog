@@ -46,7 +46,7 @@ var apiService = builder.AddProject<Projects.FLPTech_Blog_ApiService>("apiservic
 //web frontend bff
 var webbff = builder.AddProject<Projects.FLPTech_Blog_Web_BFF>("webbff")
     .WithReference(keycloak)
-    //.WaitFor(keycloak)
+    .WaitFor(keycloak)
     .WithReference(apiService)
     .WaitFor(apiService)
     .WithHttpHealthCheck("/health")
@@ -58,8 +58,6 @@ builder.AddProject<Projects.FLPTech_Blog_Web>("webfrontend")
     .WithHttpHealthCheck("/health")
     .WithReference(cache)
     .WaitFor(cache)
-    .WithReference(sqlserver)
-    .WaitFor(sqlserver)
     .WithReference(webbff)
     .WaitFor(webbff);
 
@@ -68,7 +66,11 @@ builder.AddScalarApiReference(options =>
 {
     options.WithTheme(ScalarTheme.Purple);
 })
-    .WithApiReference(keycloak)
+    .WithApiReference(keycloak,configureOptions: options => 
+    {
+        options.WithDocumentDownloadType(DocumentDownloadType.Json);
+        options.AddDocument("Api documentation", routePattern: "https://www.keycloak.org/docs-api/latest/rest-api/openapi.json");
+    })
     .WithApiReference(apiService)
     .WithApiReference(webbff);
 

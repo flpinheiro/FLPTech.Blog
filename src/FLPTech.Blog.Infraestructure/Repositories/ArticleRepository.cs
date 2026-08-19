@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FLPTech.Blog.Infraestructure.Repositories;
 
-internal class ArticleRepository(AppDbContext dbContext) : IArticleRepository
+public class ArticleRepository(AppDbContext dbContext) : IArticleRepository
 {
     public void Add(Article article)
     {
@@ -19,12 +19,15 @@ internal class ArticleRepository(AppDbContext dbContext) : IArticleRepository
 
     public async Task<IEnumerable<Article>> GetAsync(CancellationToken cancellationToken = default)
     {
-        return await dbContext.Articles.AsNoTracking().Select(a => new Article
-        {
-            Id = a.Id,
-            Title = a.Title,
-            PublishedDate = a.PublishedDate
-        }).ToListAsync(cancellationToken);
+        return await dbContext.Articles
+            .AsNoTracking()
+            .Select(a => new Article
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    PublishedDate = a.PublishedDate
+                })
+            .ToListAsync(cancellationToken);
     }
 
     public async Task<Article?> GetByIdAsync(Guid articleId, CancellationToken cancellationToken = default)

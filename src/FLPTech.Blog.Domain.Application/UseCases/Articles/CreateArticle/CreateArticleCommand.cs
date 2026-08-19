@@ -1,7 +1,4 @@
 ﻿using Cortex.Mediator.Commands;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FLPTech.Blog.Domain.Application.UseCases.Articles.CreateArticle;
 

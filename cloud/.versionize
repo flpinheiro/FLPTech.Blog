@@ -1,0 +1,29 @@
+{
+  "Projects": [
+    {
+      "Name": "flptech.blog.apphost",
+      "Path": "FLPTech.Blog.AppHost",
+      "TagTemplate": "{name}-v{version}",
+      "Changelog": {
+        "Header": "Flptech.Blog.Apphost Changelog",
+        "Sections": [
+          {
+            "Type": "feat",
+            "Section": "Features",
+            "Hidden": false
+          },
+          {
+            "Type": "fix",
+            "Section": "Bug Fixes",
+            "Hidden": false
+          },
+          {
+            "Type": "perf",
+            "Section": "Performance",
+            "Hidden": false
+          }
+        ]
+      }
+    }
+  ]
+}
